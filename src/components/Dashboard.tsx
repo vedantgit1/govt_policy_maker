@@ -222,12 +222,21 @@ const GovChatbot = ({ contextStr }: { contextStr: string }) => {
                     </div>
                 ))}
                 {isTyping && (
-                    <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
+                    <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem', alignItems: 'center' }}>
                         <div style={{ width: '28px', height: '28px', background: '#002f6c', borderRadius: '50%', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                             <Cpu size={16} color="white" />
                         </div>
-                        <div style={{ background: '#f8fafc', padding: '0.75rem', borderRadius: '0 12px 12px 12px', color: '#64748b', fontSize: '0.8rem', fontStyle: 'italic' }}>
-                            Reasoning...
+                        <div style={{ background: '#f8fafc', padding: '0.75rem 1rem', borderRadius: '0 12px 12px 12px', display: 'flex', alignItems: 'center', gap: '0.6rem', border: '1px solid #f1f5f9' }}>
+                            <style>{`@keyframes niti-spin { to { transform: rotate(360deg); } }`}</style>
+                            <div style={{
+                                width: '16px', height: '16px',
+                                border: '2.5px solid #e2e8f0',
+                                borderTop: '2.5px solid #002f6c',
+                                borderRadius: '50%',
+                                animation: 'niti-spin 0.75s linear infinite',
+                                flexShrink: 0
+                            }} />
+                            <span style={{ color: '#64748b', fontSize: '0.8rem', fontStyle: 'italic' }}>Processing…</span>
                         </div>
                     </div>
                 )}
