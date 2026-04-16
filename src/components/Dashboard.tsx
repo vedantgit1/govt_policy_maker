@@ -372,35 +372,79 @@ const PolicySimulator = () => {
     const [loadingMetrics, setLoadingMetrics] = useState(false);
 
     useEffect(() => {
-        const fetchMetrics = async () => {
+        const fetchMetrics = () => {
             setLoadingMetrics(true);
             try {
-                const res = await fetch("/api/n8n/webhook/policy-simulate-live", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        sector: activeSector.label,
-                        region: activeRegion.label,
-                        budget_cr: allocation,
-                        beneficiaries_lakh: beneficiaries,
-                        time_horizon_years: duration,
-                        rural_pct: actualRural
-                    })
+                // Replicating macroeconomic formulas natively for client-side execution
+                const sectorData: any = {
+                    'Infrastructure': { gdpMult: 3.2, jobMult: 12, infl: 0.15, tax: 0.18, conf: 92 },
+                    'Direct Welfare': { gdpMult: 0.9, jobMult: 0, infl: 0.55, tax: 0.05, conf: 88 },
+                    'Manufacturing (PLI)': { gdpMult: 2.8, jobMult: 25, infl: 0.25, tax: 0.22, conf: 85 },
+                    'Agri-Tech Modernization': { gdpMult: 1.6, jobMult: 35, infl: 0.12, tax: 0.10, conf: 75 },
+                    'Defence Indigenization': { gdpMult: 1.4, jobMult: 8, infl: 0.08, tax: 0.15, conf: 90 }
+                };
+                
+                const regionData: any = {
+                    'Pan India': { mult: 1.0 },
+                    'Maharashtra': { mult: 1.25 },
+                    'Bihar': { mult: 0.8 },
+                    'Karnataka': { mult: 1.15 },
+                    'North East': { mult: 0.9 }
+                };
+
+                const s = sectorData[activeSector.label] || sectorData['Infrastructure'];
+                const r = regionData[activeRegion.label] || regionData['Pan India'];
+                
+                const budget = Number(allocation) || 50000;
+                const ben = Number(beneficiaries) || 50;
+                const time = Number(duration) || 5;
+                
+                // 1. Capital Density & Saturation Effect
+                const ratio = budget / ben; 
+                const optimal_ratio = 1000;
+                const distribution_efficiency = 0.8 + (0.4 * (ratio / (ratio + optimal_ratio))); 
+                
+                // 2. Time Horizon Compounding
+                const time_multiplier = 0.5 + (0.1 * time);
+
+                // 3. Rural vs Urban Shift Add-on
+                const rural_factor = actualRural !== undefined ? (Number(actualRural) / 100) : 0.5;
+                const gdp_rural_adjustment = 0.8 + ((1 - rural_factor) * 0.4); 
+                const job_rural_adjustment = 0.8 + (rural_factor * 0.4); 
+
+                // 4. Macroeconomic Value Add
+                const gdp_increase_cr = budget * s.gdpMult * r.mult * distribution_efficiency * time_multiplier * gdp_rural_adjustment;
+
+                // 5. Job Creation Velocity
+                const job_spread_multiplier = 0.8 + (0.4 * (ben / 100));
+                const jobs_created = budget * s.jobMult * r.mult * job_spread_multiplier * job_rural_adjustment;
+
+                // 6. Fiscal Return
+                const tax_return_cr = gdp_increase_cr * s.tax;
+
+                // 7. Demand-Pull Inflationary Pressure
+                const annual_burn_rate = budget / time; 
+                const baseline_burn_rate = 50000 / 5; // 10,000 Cr/year
+                const velocity_factor = 0.8 + (0.4 * (ben / 100));
+                const inflation_pct = s.infl * r.mult * (annual_burn_rate / baseline_burn_rate) * velocity_factor * gdp_rural_adjustment;
+                
+                const efficiency = (gdp_increase_cr / budget).toFixed(2);
+                
+                let risk = 'Low';
+                if (inflation_pct > 0.6) risk = 'High';
+                else if (inflation_pct > 0.3) risk = 'Medium';
+
+                setMetrics({
+                    gdp: Math.round(gdp_increase_cr) || 0,
+                    jobs: Math.round(jobs_created) || 0,
+                    tax: Math.round(tax_return_cr) || 0,
+                    inf: Number(inflation_pct.toFixed(2)) || 0,
+                    roi: Number(efficiency) || 0,
+                    risk: risk,
+                    conf: Number(s.conf) || 0
                 });
-                const data = await res.json();
-                if (data && typeof data === 'object') {
-                    setMetrics({
-                        gdp: Number(data.gdp_increase_cr) || 0,
-                        jobs: Number(data.jobs_created) || 0,
-                        tax: Number(data.tax_return_cr) || 0,
-                        inf: Number(data.inflation_pct) || 0,
-                        roi: Number(data.efficiency) || 0,
-                        risk: data.risk || 'Low',
-                        conf: Number(data.confidence_pct) || 0
-                    });
-                }
             } catch (error) {
-                console.error("Webhook Error", error);
+                console.error("Simulation Error", error);
             } finally {
                 setLoadingMetrics(false);
             }
@@ -408,7 +452,7 @@ const PolicySimulator = () => {
 
         const timeout = setTimeout(fetchMetrics, 500);
         return () => clearTimeout(timeout);
-    }, [sector, region, allocation, beneficiaries, duration]);
+    }, [sector, region, allocation, beneficiaries, duration, actualRural]);
 
     // Baseline (2024-Q3)
     const baseline = { gdp: 50000, jobs: 300000, tax: 9500, inf: 0.14, roi: 1.8 };
@@ -510,11 +554,14 @@ const PolicySimulator = () => {
                     </div>
 
                     {/* Smart Suggestion (Dynamic) */}
-                    <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', padding: '0.75rem 1rem', background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: '8px', marginBottom: '1rem' }}>
+                    <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', padding: '0.75rem 1rem', background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: '8px', marginBottom: '0.5rem' }}>
                         <Lightbulb size={18} color="#16a34a" />
                         <span style={{ fontSize: '0.9rem', color: '#15803d', fontWeight: 500 }}>
                             <strong>Smart Tip:</strong> Based on 2024 trends, increasing allocation to <strong>Agri-Tech</strong> by 15% yields higher rural employment than basic Infra.
                         </span>
+                    </div>
+                    <div style={{ textAlign: 'center', fontSize: '0.8rem', color: '#64748b', fontStyle: 'italic' }}>
+                        ↓ Scroll down to see the instant changes
                     </div>
                 </div>
 
