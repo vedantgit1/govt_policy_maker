@@ -226,6 +226,40 @@ const DecisionSupport = () => {
   );
 };
 
+const PortfolioBadge = () => (
+  <a
+    href="https://www.linkedin.com/in/vedant-joshi-a7b276187/"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{
+      position: 'fixed',
+      bottom: '24px',
+      right: '20px',
+      zIndex: 9999,
+      background: 'linear-gradient(135deg, #0077b5 0%, #005885 100%)',
+      color: '#fff',
+      padding: '0.55rem 1rem',
+      borderRadius: '999px',
+      fontSize: '0.78rem',
+      fontWeight: 700,
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.45rem',
+      boxShadow: '0 4px 20px rgba(0,119,181,0.45)',
+      textDecoration: 'none',
+      letterSpacing: '0.02em',
+      backdropFilter: 'blur(8px)',
+      border: '1px solid rgba(255,255,255,0.2)',
+      transition: 'transform 0.2s, box-shadow 0.2s',
+    }}
+    onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(-2px)'; (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 8px 28px rgba(0,119,181,0.55)'; }}
+    onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 4px 20px rgba(0,119,181,0.45)'; }}
+  >
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    Built by Vedant Joshi
+  </a>
+);
+
 const Footer = () => (
   <footer>
     <div className="container">
@@ -269,10 +303,252 @@ const Footer = () => (
           <img src="https://upload.wikimedia.org/wikipedia/en/9/95/Digital_India_logo.svg" alt="Digital India" style={{ height: '40px', filter: 'brightness(0) invert(1)' }} />
         </div>
         <p style={{ marginTop: '1rem', color: '#94a3b8', fontSize: '0.7rem' }}>Powered by National e-Governance Division (NeGD)</p>
+        <div style={{
+          marginTop: '2rem',
+          paddingTop: '1.5rem',
+          borderTop: '1px solid rgba(255,255,255,0.08)',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '0.6rem'
+        }}>
+          <p style={{ color: '#64748b', fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700 }}>
+            🎓 Portfolio Project — Not an official government website
+          </p>
+          <a
+            href="https://www.linkedin.com/in/vedant-joshi-a7b276187/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              background: 'linear-gradient(135deg, #0077b5, #005885)',
+              color: '#fff',
+              padding: '0.5rem 1.4rem',
+              borderRadius: '999px',
+              fontSize: '0.82rem',
+              fontWeight: 700,
+              textDecoration: 'none',
+              boxShadow: '0 4px 16px rgba(0,119,181,0.4)',
+              letterSpacing: '0.02em'
+            }}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            Designed & Built by Vedant Joshi
+          </a>
+          <p style={{ color: '#475569', fontSize: '0.68rem', fontStyle: 'italic' }}>Crafted to demonstrate AI-powered policy intelligence systems</p>
+        </div>
       </div>
     </div>
   </footer>
 );
+
+const AboutDeveloper = () => {
+  const stats = [
+    { value: '1.4 Yrs', label: 'Industry Experience' },
+    { value: '5+', label: 'Live AI Projects' },
+    { value: 'UPSC', label: 'Civil Services Prep' },
+    { value: '2 MNCs', label: 'Global Employers' },
+  ];
+
+  const experience = [
+    {
+      role: 'AI Data Specialist',
+      org: 'Innodata',
+      period: 'Nov 2025 – Present',
+      color: '#3b82f6',
+      desc: 'Auditing and repairing broken training datasets at scale — stopping AI models from learning on corrupted pipelines before training runs begin.',
+    },
+    {
+      role: 'AI Data Specialist',
+      org: 'RWS Group',
+      period: 'Sept – Nov 2025',
+      color: '#8b5cf6',
+      desc: 'Quality gatekeeper for enterprise AI training workflows — transforming raw, multi-source documents into clean, structured training data.',
+    },
+    {
+      role: 'City Operations Lead',
+      org: 'Zepto',
+      period: 'Oct 2024 – Jan 2025',
+      color: '#f97316',
+      desc: 'Built and ran floor logistics systems for a high-velocity dark store. Maintained sub-5-minute delivery SLA during extreme peak-hour traffic.',
+    },
+    {
+      role: 'Logistics Supervisor',
+      org: 'Schnellecke Jeena Logistics',
+      period: 'Feb – June 2024',
+      color: '#22c55e',
+      desc: 'Supervised automotive supply chain on the production floor — tightened sequencing processes to eliminate bottlenecks and hit delivery precision targets.',
+    },
+  ];
+
+  const projects = [
+    {
+      name: 'AI Policy Maker Dashboard',
+      stack: 'React · Node.js · Automated API Workflows',
+      url: 'govt-policy-maker.vercel.app',
+      desc: 'Live policy-making dashboard that bypasses manual legislative research via real-time government data extraction and strategic AI analysis.',
+      tag: 'LIVE',
+    },
+    {
+      name: 'Jal Jeevan Mission Audit Dashboard',
+      stack: 'D3.js · Data Viz · Policy Analysis',
+      url: '',
+      desc: 'Interactive visualization tracking the Implementation Gap between allocated funds and actual water project utilization across Maharashtra districts.',
+      tag: 'IN DEV',
+    },
+    {
+      name: 'Valkoma AI / NeuraMinds AI',
+      stack: 'Cursor · n8n · Make.com · Low-Code',
+      url: '',
+      desc: 'Founded and built an automation agency prototype deploying AI workflows to eliminate operational bottlenecks for businesses.',
+      tag: 'PROTOTYPE',
+    },
+    {
+      name: 'Titan Compressor',
+      stack: 'React · Vercel · Single-Page Architecture',
+      url: '',
+      desc: 'Enterprise-grade video compression tool capable of handling heavy media files at scale in a clean single-page deployment.',
+      tag: 'DEPLOYED',
+    },
+  ];
+
+  return (
+    <section id="about" style={{ background: 'linear-gradient(180deg, #f8faff 0%, #eef2ff 100%)', padding: '6rem 0' }}>
+      <div className="container">
+
+        {/* Section Header */}
+        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(0,47,108,0.08)', borderRadius: '999px', padding: '0.4rem 1.2rem', marginBottom: '1.2rem' }}>
+            <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--primary-blue)', textTransform: 'uppercase', letterSpacing: '0.12em' }}>🏗 The Architect Behind This System</span>
+          </div>
+          <h2 style={{ fontSize: '2.8rem', color: 'var(--primary-blue)', marginBottom: '1rem', lineHeight: 1.15 }}>
+            Vedant Joshi
+          </h2>
+          <p style={{ color: 'var(--text-muted)', fontSize: '1.15rem', maxWidth: '700px', margin: '0 auto', lineHeight: 1.7 }}>
+            Systems Architect & Data Operations Lead — bridging Indian public policy, AI engineering, and real-world execution. Not just research. Not just code. <strong>Both.</strong>
+          </p>
+          <div style={{ marginTop: '1.5rem' }}>
+            <a
+              href="https://www.linkedin.com/in/vedant-joshi-a7b276187/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'linear-gradient(135deg, #0077b5, #005885)', color: '#fff', padding: '0.65rem 1.6rem', borderRadius: '999px', fontWeight: 700, fontSize: '0.9rem', textDecoration: 'none', boxShadow: '0 4px 20px rgba(0,119,181,0.3)' }}
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              Connect on LinkedIn
+            </a>
+          </div>
+        </div>
+
+        {/* Stats Row */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.5rem', marginBottom: '4rem' }}>
+          {stats.map((s, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              style={{ background: 'white', borderRadius: '16px', padding: '1.8rem', textAlign: 'center', boxShadow: '0 4px 24px rgba(0,47,108,0.08)', border: '1px solid #e8edf8' }}
+            >
+              <div style={{ fontSize: '2.2rem', fontWeight: 900, color: 'var(--primary-blue)', lineHeight: 1 }}>{s.value}</div>
+              <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '0.5rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em' }}>{s.label}</div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Two-column: Profile + Experience */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: '3rem', marginBottom: '4rem', alignItems: 'start' }}>
+
+          {/* Left: Profile */}
+          <div>
+            <div style={{ background: 'white', borderRadius: '20px', padding: '2.5rem', boxShadow: '0 4px 24px rgba(0,47,108,0.08)', border: '1px solid #e8edf8' }}>
+              <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--primary-blue)', marginBottom: '1.2rem' }}>Profile</h3>
+              <p style={{ color: 'var(--text-muted)', lineHeight: 1.8, fontSize: '0.95rem' }}>
+                I operate at the intersection of <strong>Indian governance</strong> and <strong>AI systems engineering</strong>. My civil services preparation gave me structural fluency in public policy, regional economics, and state finance. My professional career has been about building the automated pipelines and data systems that make policy strategies measurable and deployable on the ground.
+              </p>
+              <div style={{ marginTop: '1.8rem', paddingTop: '1.5rem', borderTop: '1px solid #f1f5f9' }}>
+                <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--primary-blue)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '1rem' }}>Education</h4>
+                {[
+                  { title: 'Public Policy & Political Consulting', org: 'Rebounce Policy Lab · 2026–Present' },
+                  { title: 'Civil Services Preparation', org: 'UPSC · NABARD · SEBI' },
+                  { title: 'B.Tech Mechanical Engineering', org: 'Bajaj Institute of Technology, Wardha' },
+                ].map((e, i) => (
+                  <div key={i} style={{ marginBottom: '1rem', display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                    <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--primary-blue)', marginTop: '6px', flexShrink: 0 }} />
+                    <div>
+                      <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#1e293b' }}>{e.title}</div>
+                      <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>{e.org}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div style={{ marginTop: '1.5rem', paddingTop: '1.5rem', borderTop: '1px solid #f1f5f9' }}>
+                <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--primary-blue)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '1rem' }}>Core Competencies</h4>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                  {['AI Data Engineering', 'Policy Analysis', 'React / Node.js', 'Pipeline Automation', 'UPSC Polity & Finance', 'D3.js Visualization', 'n8n / Make.com', 'Logistics Systems', 'Cold-chain Ops', 'Political Consulting'].map((skill, i) => (
+                    <span key={i} style={{ background: 'rgba(0,47,108,0.07)', color: 'var(--primary-blue)', padding: '0.3rem 0.8rem', borderRadius: '999px', fontSize: '0.75rem', fontWeight: 700 }}>{skill}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Experience Timeline */}
+          <div>
+            <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--primary-blue)', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Professional Experience</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
+              {experience.map((exp, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  style={{ background: 'white', borderRadius: '16px', padding: '1.5rem 1.8rem', boxShadow: '0 2px 16px rgba(0,47,108,0.07)', border: '1px solid #e8edf8', borderLeft: `4px solid ${exp.color}` }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
+                    <div>
+                      <div style={{ fontWeight: 800, fontSize: '1rem', color: '#1e293b' }}>{exp.role}</div>
+                      <div style={{ fontWeight: 600, fontSize: '0.82rem', color: exp.color }}>{exp.org}</div>
+                    </div>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 600, whiteSpace: 'nowrap', marginLeft: '1rem' }}>{exp.period}</span>
+                  </div>
+                  <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', lineHeight: 1.7, margin: 0 }}>{exp.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Projects Grid */}
+        <div>
+          <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--primary-blue)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '1.5rem', textAlign: 'center' }}>Applied AI & Data Architecture Projects</h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+            {projects.map((p, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ y: -4 }}
+                style={{ background: 'white', borderRadius: '18px', padding: '2rem', boxShadow: '0 4px 24px rgba(0,47,108,0.08)', border: '1px solid #e8edf8', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontSize: '0.65rem', fontWeight: 800, color: p.tag === 'LIVE' ? '#22c55e' : p.tag === 'IN DEV' ? '#f97316' : '#6366f1', background: p.tag === 'LIVE' ? 'rgba(34,197,94,0.1)' : p.tag === 'IN DEV' ? 'rgba(249,115,22,0.1)' : 'rgba(99,102,241,0.1)', padding: '0.2rem 0.7rem', borderRadius: '999px', letterSpacing: '0.08em' }}>{p.tag}</span>
+                </div>
+                <h4 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--primary-blue)', margin: 0 }}>{p.name}</h4>
+                <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: 1.7, margin: 0 }}>{p.desc}</p>
+                <div style={{ fontSize: '0.72rem', color: '#94a3b8', fontWeight: 600, fontFamily: 'monospace', background: '#f8fafc', padding: '0.4rem 0.8rem', borderRadius: '6px' }}>{p.stack}</div>
+                {p.url && <a href={`https://${p.url}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.78rem', color: 'var(--secondary-blue)', fontWeight: 700, textDecoration: 'none' }}>↗ {p.url}</a>}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
+};
 
 import { Dashboard } from './components/Dashboard';
 
@@ -313,8 +589,10 @@ function App() {
         <Hero />
         <Pillars />
         <DecisionSupport />
+        <AboutDeveloper />
       </main>
       <Footer />
+      <PortfolioBadge />
     </div>
   );
 }
